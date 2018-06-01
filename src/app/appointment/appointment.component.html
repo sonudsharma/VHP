@@ -1,0 +1,312 @@
+<div class="main-content" *ngIf="type == 'Doctor' || type == 'Hospital' || type == 'Admin' ">
+  <div class="container-fluid">
+    <div class="row">
+      <div class="col-md-12">
+        <div class="card">
+          <div class="card-header" data-background-color="red">
+            <div class="row">
+              <div class="col-md-9">
+                <p class="title" style="padding-top: 0px;margin-top: 17px;font-size:18px">Appoitment List</p>
+              </div>
+              <div class="col-md-3">
+                <div class="form-group is-empty" style="margin-top: 3px;">
+                  <!-- <p class="category">Here is a subtitle for this table</p>col-xs-12 col-sm-10 col-md-8 col-sm-offset-1 col-md-offset-2 -->
+                  <input type="text" [(ngModel)]="term" class="form-control " placeholder="Search" style="color: white">
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="card-content table-responsive">
+            <table class="table">
+              <thead class="text-danger">
+                <tr>
+                  <!-- <th>Id</th> -->
+                  <th>Hospital Name</th>
+                  <th>Doctor Name</th>
+                  <th>Patient Name</th>
+                  <th>Purpose</th>
+                  <th>Date</th>
+                  <th>Time</th>
+                  <th>Accept</th>
+                  <th>Remove</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr *ngFor="let user of arr | filter:term">
+                  <!-- <td>{{user.user_id}}</td> -->
+                  <td>{{user.HospitalName}}</td>
+                  <td>{{user.DoctorName}}</td>
+                  <td>{{user.patientName}}</td>
+                  <td>{{user.Purpose}}</td>
+                  <td>{{convert(user.Date)}}</td>
+                  <td>{{user.Time}}10:30</td>
+                  <td scope="row">
+                    <button type="submit" name="edit" value="Edit" title="Accept" class=" btn btn-primary">
+                      <i class="material-icons">event_available</i>
+                    </button>
+                  </td>
+                  <td scope="row">
+                    <button type="submit" name="delete" value="Delete" title="Remove" class="btn btn-danger" (click)="deleteUser(user.user_id,'top','center')">
+                      <i class="material-icons">event_busy</i>
+                    </button>
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+
+<div class="main-content" *ngIf="type == 'Patient' && !id || type == 'Hospital'">
+  <div class="container-fluid">
+    <div class="row">
+      <div class="col-md-8">
+        <div class="card">
+          <div class="card-header" data-background-color="red">
+            <h4 class="title">Book Appointment</h4>
+            <!-- <p class="category">Complete your profile</p> -->
+          </div>
+          <div class="card-content">
+
+            <form [formGroup]="rForm" (ngSubmit)="appointment(rForm.value,'top','center')">
+              <div class="row">
+                <div class="col-md-6">
+                  <div class="form-group form-black label-floating is-empty" [ngClass]="displayFieldCss('speciality')">
+                    <label>Purpose</label>
+                    <select class="form-control" id="speciality" name="speciality" formControlName="speciality" (ngModelChange)="saverange($event)"
+                      required>
+
+                      <option *ngFor="let speciality of arr3" [value]="speciality">{{speciality}}</option>
+                    </select>
+                    <div *ngIf="required!=true">
+                      <app-field-error-display [displayError]="isFieldValid('speciality',0)" errorMsg="Speciality is Required">
+                      </app-field-error-display>
+                    </div>
+                  </div>
+                </div>
+                <div class="col-md-6">
+                  <div class="form-group form-black label-floating is-empty" [ngClass]="displayFieldCss('doctor')">
+                    <label>Doctor Name</label>
+                    <select class="form-control" id="doctor" name="doctor" formControlName="doctor" (ngModelChange)="saverange2($event)" required>
+
+                      <option *ngFor="let doctor of arr2" [value]="doctor.title">{{doctor.title}}</option>
+                    </select>
+                    <div *ngIf="required!=true">
+                      <app-field-error-display [displayError]="isFieldValid('doctor',0)" errorMsg="Doctor Name is Required">
+                      </app-field-error-display>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              <div class="row">
+                <div class="col-md-6">
+                  <div class="form-group form-black label-floating is-empty" [ngClass]="displayFieldCss('hospital')">
+                    <label>Hospital Name</label>
+                    <select class="form-control" id="hospital" name="hospital" formControlName="hospital" required>
+
+                      <option *ngFor="let hospital of arr1" [value]="hospital.name">{{hospital.name}}</option>
+                    </select>
+                    <div *ngIf="required!=true">
+                      <app-field-error-display [displayError]="isFieldValid('hospital',0)" errorMsg="Hospital Name is Required">
+                      </app-field-error-display>
+                    </div>
+                  </div>
+                </div>
+                <div class="col-md-6">
+                  <div class="form-group form-black label-floating is-empty">
+                    <label>Patient Name</label>
+                    <input type="text" class="form-control" id="patient" value="{{name}}" [readonly]="true" name="patient" required>
+                  </div>
+                </div>
+              </div>
+
+              <div class="row">
+                <div class="col-md-6">
+                  <div class="form-group form-black label-floating is-empty" [ngClass]="displayFieldCss('date')">
+                    <label>Date</label>
+                    <input type="date" class="form-control" id="date" formControlName="date" name="date" required>
+                    <div *ngIf="required!=true">
+                      <app-field-error-display [displayError]="isFieldValid('date',0)" errorMsg="Date is Required">
+                      </app-field-error-display>
+                    </div>
+                  </div>
+                </div>
+                <div class="col-md-6">
+                  <div class="form-group form-black label-floating is-empty" [ngClass]="displayFieldCss('time')">
+                    <label>Time</label>
+                    <input type="time" class="form-control" id="time" formControlName="time" name="time" required>
+                    <div *ngIf="required!=true">
+                      <app-field-error-display [displayError]="isFieldValid('time',0)" errorMsg="Time is Required">
+                      </app-field-error-display>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              <button type="button" class="btn btn-danger pull-right" routerLink="/dashboard">Cancel</button>
+              <button type="submit" class="btn btn-danger pull-right">Book</button>
+
+              <div class="clearfix"></div>
+            </form>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="main-content" *ngIf="type == 'Patient' && id || type == 'Hospital'">
+  <div class="container-fluid">
+    <div class="row">
+      <div class="col-md-8">
+        <div class="card">
+          <div class="card-header" data-background-color="red">
+            <h4 class="title">Book Appointment1</h4>
+          </div>
+          <div class="card-content">
+
+            <form [formGroup]="rForm" (ngSubmit)="appointment(rForm.value,'top','center')">
+              <div class="row">
+                <div class="col-md-6">
+                  <div class="form-group form-black label-floating is-empty">
+                    <label>Hospital Name</label>
+                    <select class="form-control" id="hospital" name="hospital" value="{{hospital}}" (ngModelChange)="saverange($event)" required>
+
+                      <option *ngFor="let hospital of arr1" [value]="hospital.name">{{hospital.name}}</option>
+                    </select>
+                  </div>
+                </div>
+                <div class="col-md-6">
+                  <div class="form-group form-black label-floating is-empty">
+                    <label>Doctor Name</label>
+                    <select class="form-control" id="doctor" name="doctor" value="{{doctor}}" required>
+
+                      <option *ngFor="let doctor of arr2" [value]="doctor.title">{{doctor.title}}</option>
+                    </select>
+                  </div>
+                </div>
+              </div>
+
+              <div class="row">
+                <div class="col-md-6">
+                  <div class="form-group form-black label-floating is-empty">
+                    <label>Patient Name</label>
+                    <input type="text" class="form-control" id="patient" value="{{name}}" [readonly]="true" name="patient" required>
+                  </div>
+                </div>
+                <div class="col-md-6">
+                  <div class="form-group form-black label-floating is-empty">
+                    <label>Purpose</label>
+                    <input type="text" class="form-control" id="speciality" value="{{speciality}}" [readonly]="true" name="speciality" required>
+                    <!-- <select class="form-control" id="speciality" name="speciality" [(ngModel)]="speciality" required>
+
+                      <option *ngFor="let speciality of arr3" [value]="speciality">{{speciality}}</option>
+                    </select> -->
+
+                  </div>
+                </div>
+              </div>
+
+              <div class="row">
+                <div class="col-md-6">
+                  <div class="form-group form-black label-floating is-empty" [ngClass]="displayFieldCss('date')">
+                    <label>Date</label>
+                    <input type="date" class="form-control" id="date" formControlName="date" name="date" required>
+                    <div *ngIf="required!=true">
+                      <app-field-error-display [displayError]="isFieldValid('date',0)" errorMsg="Date is Required">
+                      </app-field-error-display>
+                    </div>
+                  </div>
+                </div>
+                <div class="col-md-6">
+                  <div class="form-group form-black label-floating is-empty" [ngClass]="displayFieldCss('time')">
+                    <label>Time</label>
+                    <input type="time" class="form-control" id="time" formControlName="time" name="time" required>
+                    <div *ngIf="required!=true">
+                      <app-field-error-display [displayError]="isFieldValid('time',0)" errorMsg="Time is Required">
+                      </app-field-error-display>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              <button type="button" class="btn btn-danger pull-right" routerLink="/doctorList">Cancel</button>
+              <button type="Submit" class="btn btn-danger pull-right">Book</button>
+
+              <div class="clearfix"></div>
+            </form>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="container-fluid" *ngIf="type == 'Patient' || type == 'Hospital'">
+  <div class="row">
+    <div class="col-md-12">
+      <div class="card">
+        <div class="card-header" data-background-color="red">
+          <div class="row">
+            <div class="col-md-9">
+              <p class="title" style="padding-top: 0px;margin-top: 17px;font-size:18px">{{name}} Appointment History Details</p>
+            </div>
+            <div class="col-md-3">
+              <div class="form-group is-empty" style="margin-top: 3px;">
+                <!-- <p class="category">Here is a subtitle for this table</p>col-xs-12 col-sm-10 col-md-8 col-sm-offset-1 col-md-offset-2 -->
+                <input type="text" [(ngModel)]="term" class="form-control " placeholder="Search" style="color: white">
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="card-content table-responsive">
+          <table class="table">
+            <thead class="text-danger">
+              <tr>
+                <!-- <th>Id</th> -->
+                <th>Hospital Name</th>
+                <th>Doctor Name</th>
+                <th>Patient Name</th>
+                <th>Purpose</th>
+                <th>Date</th>
+                <th>Time</th>
+                <th>Status</th>
+                <th>Submit</th>
+                <th>Cancel</th>
+                <th>Edit</th>
+
+              </tr>
+            </thead>
+            <tbody>
+              <tr *ngFor="let user of arr | filter:term">
+                <!-- <td>{{user.user_id}}</td> -->
+                <td>{{user.HospitalName}}</td>
+                <td>{{user.DoctorName}}</td>
+                <td>{{user.patientName}}</td>
+                <td>{{user.Purpose}}</td>
+                <td>{{convert(user.Date)}}</td>
+                <td>{{user.Time}}10:30</td>
+                <td scope="row">
+                  <button type="submit" name="edit" value="Edit" class=" btn btn-primary">
+
+                  </button>
+                </td>
+
+              </tr>
+            </tbody>
+          </table>
+
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

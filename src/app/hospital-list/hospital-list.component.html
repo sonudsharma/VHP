@@ -1,0 +1,63 @@
+<div class="main-content">
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-md-12">
+                <div class="card">
+                    <div class="card-header" data-background-color="red">
+                        <div class="row">
+                            <div class="col-md-9">
+                                <p class="title" style="padding-top: 0px;margin-top: 17px;font-size:18px">Hospital List</p>
+                            </div>
+                            <div class="col-md-3">
+                                <div class="form-group is-empty" style="margin-top: 3px;">
+                                    <!-- <p class="category">Here is a subtitle for this table</p>col-xs-12 col-sm-10 col-md-8 col-sm-offset-1 col-md-offset-2 -->
+                                    <input type="text" [(ngModel)]="term" class="form-control fa fa-search " placeholder="Search" style="color: white">
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="card-content table-responsive">
+                        <table class="table">
+                            <thead class="text-danger">
+                                <tr>
+                                    <th>Id</th>
+                                    <th>Name</th>
+                                    <th>Address</th>
+                                    <th>Phone</th>
+                                    <th>Doctor</th>
+                                    <th *ngIf="type == 'Hospital' || type == 'Admin'">Add Doctor</th>
+                                    <!-- <th>Edit</th>
+                                  <th>Delete</th> -->
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr *ngFor="let user of arr | filter:term">
+                                    <td>{{user.regId}}</td>
+                                    <td>{{user.name}}</td>
+                                    <td>{{user.address}}</td>
+                                    <td>{{user.phone}}</td>
+                                    <td scope="row">
+                                        <button type="submit" name="view" value="View" class=" btn btn-primary" (click)="doctor(user.name)">
+                                            <i class="fa fa-user-md" style="font-size:20px"></i>
+                                        </button>
+                                    </td>
+                                    <td scope="row"  *ngIf="type == 'Hospital' || type == 'Admin'">
+                                        <button type="submit" name="view" value="View" class=" btn btn-primary" (click)="register(user.name)">
+                                            <i class="fa fa-user-plus" style="font-size:20px"></i>
+                                        </button>
+                                    </td>
+                                    <!-- <td scope="row"><button type="submit" name="edit" value="Edit" class=" btn btn-primary" (click)="editUser(user.id)"><i class="glyphicon glyphicon-pencil"></i></button></td>
+                                  <td scope="row"><button type="submit" name="delete" value="Delete" class="btn btn-danger" (click)="deleteUser(user.id)" ><i class="glyphicon glyphicon-trash"></i></button></td> -->
+                                </tr>
+                            </tbody>
+                        </table>
+
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </div>
+</div>
+<!-- <i class="fa fa-user-md icon-stack-3x"></i>
+                                    <i class="fa fa-plus icon-stack-2x" style="margin-left:8px"></i> -->

@@ -1,0 +1,61 @@
+<div class="main-content">
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-md-12">
+                <div class="card">
+                    <div class="card-header" data-background-color="red">
+                        <div class="row">
+                            <div class="col-md-9">
+                                <p class="title" style="padding-top: 0px;margin-top: 17px;font-size:18px">Media List</p>
+                            </div>
+                            <div class="col-md-3">
+                                <div class="form-group is-empty" style="margin-top: 3px;">
+                                    <!-- <p class="category">Here is a subtitle for this table</p>col-xs-12 col-sm-10 col-md-8 col-sm-offset-1 col-md-offset-2 -->
+                                    <!-- <input type="text" [(ngModel)]="term"  class="form-control " placeholder="Search" style="color: white"> -->
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="card-content table-responsive">
+
+                        <table class="table">
+                            <thead class="text-danger">
+                                <tr>
+                                    <!-- <th>Id</th> -->
+                                    <th>Title</th>
+                                    <th>URL</th>
+                                    <th>Category</th>
+                                    <!-- <th>Edit</th>
+                                  <th>Delete</th> -->
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr *ngFor="let media of arr ">
+                                    <!-- <td>{{media.id}}</td> -->
+                                    <td>{{media.Title}}</td>
+                                    <td>
+                                        <video width="300" height="100" controls>
+                                            <source src="{{media.URL}}" type="video/mp4">
+                                            <source src="{{media.URL}}" type="video/ogg">
+
+                                        </video>
+                                        <a href="{{media.URL}}" target="_blank">Big Buck Bunny</a>.
+
+                                    </td>
+
+                                    <td>{{media.Category}}</td>
+                                    <!-- <td scope="row"><button type="submit" name="edit" value="Edit" class=" btn btn-primary btn-simple btn-xs" (click)="editUser(user.id)"><i class="material-icons">edit</i></button></td>
+                                  <td scope="row"><button type="submit" name="delete" value="Delete" class="btn btn-danger btn-simple btn-xs" (click)="deleteUser(user.id)" ><i class="material-icons">close</i></button></td> -->
+                                </tr>
+                            </tbody>
+                        </table>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- <i class="glyphicon glyphicon-pencil"></i> -->
+<!-- <i class="glyphicon glyphicon-trash"></i> -->

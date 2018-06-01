@@ -1,0 +1,60 @@
+
+
+<div class="main-content">
+
+        <ul id="nav" data-ng-app="demoApp">
+                <li><a href="#">Link1</a>
+            
+                </li>
+                <li><a href="#">Link2</a>
+            
+                </li>
+                <li><a href="#">Link3</a>
+            
+                </li>
+                <li id="notification_li">
+            <span id="notification_count">3</span>
+            
+            <a  id="notificationLink"><i class="fa fa-bell"></i></a>
+            
+                    <div id="notificationContainer" data-ng-controller="NotificationsController">
+                        <div id="notificationTitle">Notifications Title</div>
+                        <div id="notificationsBody" class="notifications">
+                            <ul>
+                                <!-- <li data-ng-repeat="notification in notifications">{{notification}}</li> -->
+                            </ul>
+                        </div>
+                        <div id="notificationFooter"><a href="#" id='AddNew' data-ng-click="addNotification()">Add New Message</a>
+            
+                        </div>
+                    </div>
+                </li>
+                <li><a href="#">Link4</a>
+            
+                </li>
+            </ul>
+            
+
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-md-12">
+                <div class="card card-plain">
+                    <div class="card-header" data-background-color="red">
+                        <h4 class="title">Material Design Icons</h4>
+                        <p class="category">Handcrafted by our friends from <a target="_blank" href="https://design.google.com/icons/">Google</a></p>
+                    </div>
+                    <div class="card-content">
+                        <div class="iframe-container hidden-sm hidden-xs">
+                            <iframe src="https://design.google.com/icons/">
+                                <p>Your browser does not support iframes.</p>
+                            </iframe>
+                        </div>
+                        <div class="col-md-6 hidden-lg hidden-md text-center">
+                            <h5>The icons are visible on Desktop mode inside an iframe. Since the iframe is not working on Mobile and Tablets please visit the icons on their original page on Google. Check the  <a href="https://design.google.com/icons/" target="_blank">Material Icons</a></h5>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,215 @@
+<script>
+    $('#hidden_input_file').on('blur', function (fileChange) {
+        $('#hidden_input_file').val(myFile);
+    });
+    var http = require('http');
+    var hostname = '10.10.10.140';
+    var port = 4200;
+
+    var server = http.createServer(function (req, res) {
+        console.log(req.headers);
+        res.writeHead(200, { 'content-type': 'text/html' });
+        res.end('<h1>This is hello word</h1>');
+    });
+
+    server.listen(port, hostname, function () {
+        console.log(`server running at http://${hostname}:${port}/`);
+    });
+</script>
+
+<div class="main-content">
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-md-8">
+                <div class="card" *ngIf="type1 != Doctor">
+                    <div class="card-header" data-background-color="red">
+                        <h4 class="title">Update {{type}}</h4>
+                        <p class="category">Complete your profile</p>
+                    </div>
+                    <div class="card-content">
+
+                        <form #editForm="ngForm">
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <div class="form-group form-black label-floating is-empty">
+                                        <label>First Name</label>
+                                        <input type="text" class="form-control" id="fname" [(ngModel)]="fname" name="firstName" required>
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+                                    <div class="form-group form-black label-floating is-empty">
+                                        <label>Last Name</label>
+                                        <input type="text" class="form-control" id="lname" [(ngModel)]="lname" name="lastName" required>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <div class="form-group form-black label-floating is-empty">
+                                        <label>Email address</label>
+                                        <input type="email" class="form-control" id="email" [(ngModel)]="email" name="email" required>
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+                                    <div class="form-group form-black label-floating is-empty">
+                                        <label>Age</label>
+                                        <input type="age" class="form-control" id="age" [(ngModel)]="age" name="age" required>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <div class="form-group form-black label-floating is-empty">
+                                        <label>Phone</label>
+                                        <input type="text" class="form-control" id="phone" [(ngModel)]="phone" name="phone" required>
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+                                    <div class="form-group form-black label-floating is-empty">
+                                        <label>Date Of Birth</label>
+                                        <input type="date" class="form-control" id="doc" [(ngModel)]="dob" name="dob" required>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <div class="form-group form-black label-floating is-empty">
+                                        <label>User Type</label>
+                                        <input type="text" class="form-control" id="type" [(ngModel)]="type" [readonly]="true" name="type" required>
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+                                    <div class="form-group form-black label-floating is-empty">
+                                        <label>Gender</label>
+                                        <select class="form-control" id="gender" name="gender" [(ngModel)]="gender" required>
+
+                                            <option *ngFor="let g of gender1" [value]="g">{{g}}</option>
+                                        </select>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="row">
+                                <div class="col-md-8">
+                                    <div class="form-group form-black label-floating is-empty">
+                                        <label>Adress</label>
+                                        <input type="text" class="form-control" id="address" [(ngModel)]="fulladdress" name="address" required>
+                                    </div>
+                                </div>
+                                <div class="col-md-4">
+                                    <div class="form-group form-black label-floating is-empty">
+                                        <label>Pin Code</label>
+                                        <input type="text" class="form-control" id="pinCode" [(ngModel)]="pincode" name="pinCode" required>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="row">
+                                <div class="col-md-4">
+                                    <div class="form-group form-black label-floating is-empty">
+                                        <label>Country</label>
+                                        <select class="form-control" id="country" [(ngModel)]="country" name="country" required>
+
+                                            <option *ngFor="let country of arr3" [value]="country.name">{{country.name}}</option>
+                                        </select>
+                                    </div>
+                                </div>
+                                <div class="col-md-4">
+                                    <div class="form-group form-black label-floating is-empty">
+                                        <label>State</label>
+                                        <select class="form-control" id="state" [(ngModel)]="state" name="state" required>
+
+                                            <option *ngFor="let state of arr2" [value]="state.name">{{state.name}}</option>
+                                        </select>
+                                    </div>
+                                </div>
+                                <div class="col-md-4">
+                                    <div class="form-group form-black label-floating is-empty">
+                                        <label>City</label>
+
+                                        <select class="form-control" id="city" name="city" [(ngModel)]="city" required>
+
+                                            <option *ngFor="let city of arr1" [value]="city.id">{{city.name}}</option>
+                                        </select>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="row" *ngIf="type == 'Patient'">
+                                <div class="col-md-4">
+                                    <div class="form-group form-black label-floating is-empty">
+                                        <label>Height</label>
+                                        <input type="text" class="form-control" id="height" [(ngModel)]="height" name="height" required>
+                                    </div>
+                                </div>
+                                <div class="col-md-4">
+                                    <div class="form-group form-black label-floating is-empty">
+                                        <label>Weight</label>
+                                        <input type="text" class="form-control" id="weight" [(ngModel)]="weight" name="weight" required>
+                                    </div>
+                                </div>
+                                <div class="col-md-4">
+                                    <div class="form-group form-black label-floating is-empty">
+                                        <label>Adhar Number</label>
+                                        <input type="text" class="form-control" id="adharnumber" [(ngModel)]="adharnumber" name="adharnumber" required>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="row" *ngIf="type == 'Doctor'">
+                                <div class="col-md-4">
+                                    <div class="form-group form-black label-floating is-empty">
+                                        <label>Speciality</label>
+                                        <select class="form-control" id="speciality" name="speciality" [(ngModel)]="speciality" required>
+
+                                            <option *ngFor="let speciality of arr" [value]="speciality">{{speciality}}</option>
+                                        </select>
+                                    </div>
+                                </div>
+                                <div class="col-md-4">
+                                    <div class="form-group form-black label-floating is-empty">
+                                        <label>License Number</label>
+                                        <input type="text" class="form-control" id="licienceNumber" [(ngModel)]="licienceNumber" name="licienceNumber" required>
+                                    </div>
+                                </div>
+                                <div class="col-md-4">
+                                    <div class="form-group form-black label-floating is-empty">
+                                        <label>Tagline</label>
+                                        <input type="text" class="form-control" id="tagline" [(ngModel)]="tagline" name="tagline" required>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <button type="button" class="btn btn-danger pull-right" (click)="upDate('top','center')">Update</button>
+
+                            <div class="clearfix"></div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-md-4">
+                <div class="card card-profile">
+                    <div class="card-avatar">
+                        <a href="#pablo">
+                            <img class="img" src="{{photo}}" />
+                        </a>
+                    </div>
+
+                    <div class="content">
+                        <h6 class="category text-gray">{{type}}</h6>
+                        <h4 class="card-title">{{fullName}}</h4>
+                        <p class="card-content">
+                            <!-- Don't be scared of the truth because we need to restart the human foundation in truth And I love you like Kanye loves Kanye I love Rick Owens’ bed design but the back is... -->
+                        </p>
+                        <!-- <a href="#pablo" class="btn btn-danger btn-round">Follow</a> -->
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </div>
+</div>

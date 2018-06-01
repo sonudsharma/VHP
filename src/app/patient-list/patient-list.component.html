@@ -1,0 +1,60 @@
+<div class="main-content">
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-md-12">
+                <div class="card">
+                    <div class="card-header" data-background-color="red">
+                        <div class="row">
+                            <div class="col-md-9">
+                                <p class="title" style="padding-top: 0px;margin-top: 17px;font-size:18px">Patient List</p>
+                            </div>
+                            <div class="col-md-3">
+                                <div class="form-group is-empty" style="margin-top: 3px;">
+                                    <!-- <p class="category">Here is a subtitle for this table</p>col-xs-12 col-sm-10 col-md-8 col-sm-offset-1 col-md-offset-2 -->
+                                    <input type="text" [(ngModel)]="term" class="form-control " placeholder="Search" style="color: white">
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="card-content table-responsive">
+
+                        <table class="table">
+                            <thead class="text-danger">
+                                <tr>
+                                    <!-- <th>Id</th> -->
+                                    <th>Photo</th>
+                                    <th>Patient Name</th>
+                                    <th>Hospital</th>
+                                    <th *ngIf="type == 'Hospital' || type == 'Admin'">Edit</th>
+                                    <th *ngIf="type == 'Hospital' || type == 'Admin'">Delete</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr *ngFor="let user of arr | filter:term">
+                                    <!-- <td>{{user.user_id}}</td> -->
+                                    <td>
+                                        <img src={{user.PhotoUrl}} alt="Girl in a jacket" style="width: 30%">
+                                    </td>
+                                    <td>{{user.title}}</td>
+                                    <td>{{user.HospitalName}}</td>
+                                    <td scope="row" *ngIf="type == 'Hospital' || type == 'Admin'">
+                                        <button type="submit" name="edit" value="Edit" class=" btn btn-primary" (click)="editUser(user.user_id)">
+                                            <i class="glyphicon glyphicon-pencil"></i>
+                                        </button>
+                                    </td>
+                                    <td scope="row" *ngIf="type == 'Hospital' || type == 'Admin'">
+                                        <button type="submit" name="delete" value="Delete" class="btn btn-danger" (click)="deleteUser(user.user_id,'top','center')">
+                                            <i class="glyphicon glyphicon-trash"></i>
+                                        </button>
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

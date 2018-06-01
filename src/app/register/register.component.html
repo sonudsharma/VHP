@@ -1,0 +1,223 @@
+<div class="login-page">
+    <div class="row justify-content-md-center" style="padding-left: 300px">
+        <div class="col-md-4">
+
+        </div>
+    </div>
+</div>
+
+
+<div class="main-content" *ngIf="name == null">
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-md-8">
+                <div class="card">
+                    <div class="card-header" data-background-color="red">
+                        <h4 class="title">Registration Form</h4>
+                        <!-- <p class="category">Complete your profile</p> -->
+                    </div>
+                    <div class="card-content">
+                        <!-- *ngIf="message1==true && id!=null; else elseBlock" -->
+                        <form [formGroup]="rForm" (ngSubmit)="addPost(rForm.value,'top','center')">
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <div class="form-group form-black label-floating" [ngClass]="displayFieldCss('firstname')">
+                                        <label class="control-label">First Name *</label>
+                                        <input type="text" class="form-control" formControlName="firstname" pattern="^[A-Za-z]{1,10}$" required>
+                                        <div *ngIf="required!=true">
+                                            <app-field-error-display [displayError]="isFieldValid('firstname',0)" errorMsg="First Name is Required">
+                                            </app-field-error-display>
+                                        </div>
+                                        <div *ngIf="pattern!=true">
+                                            <app-field-error-display [displayError]="isFieldValid('firstname',1)" errorMsg="First Name Accepte only 1 to 10 Alphabet">
+                                            </app-field-error-display>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+                                    <div class="form-group form-black label-floating" [ngClass]="displayFieldCss('lastname')">
+                                        <label class="control-label">Last Name *</label>
+                                        <input type="text" class="form-control" formControlName="lastname" required pattern="^[A-Za-z]{1,10}$">
+                                        <div *ngIf="required!=true">
+                                            <app-field-error-display [displayError]="isFieldValid('lastname',0)" errorMsg="Last Name is Required">
+                                            </app-field-error-display>
+                                        </div>
+                                        <div *ngIf="pattern!=true">
+                                            <app-field-error-display [displayError]="isFieldValid('lastname',1)" errorMsg="Last Name Accepte only 1 to 10 Alphabet">
+                                            </app-field-error-display>
+                                        </div>
+
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="row">
+                                <div class="col-md-12">
+                                    <div class="form-group form-black label-floating" [ngClass]="displayFieldCss('email')">
+                                        <label class="control-label">Email address *</label>
+                                        <input type="email" class="form-control" formControlName="email" pattern="^\w+@[a-zA-Z_]+?\.[a-zA-Z]{2,3}$" required>
+                                        <div *ngIf="required!=true">
+                                            <app-field-error-display [displayError]="isFieldValid('email',0)" errorMsg="Email is Required">
+                                            </app-field-error-display>
+                                        </div>
+                                        <div *ngIf="pattern!=true">
+                                            <app-field-error-display [displayError]="isFieldValid('email',1)" errorMsg="Enter Email is Ex. azamsharp@gmail.com Format">
+                                            </app-field-error-display>
+                                        </div>
+                                    </div>
+                                </div>
+
+                            </div>
+
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <div class="form-group form-black label-floating" [ngClass]="displayFieldCss('password')">
+                                        <label class="control-label">Password *</label>
+                                        <input type="password" class="form-control" formControlName="password" required pattern="((?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[@#$%]).{8,20})">
+                                        <div *ngIf="required!=true">
+                                            <app-field-error-display [displayError]="isFieldValid('password',0)" errorMsg="Password is Required">
+                                            </app-field-error-display>
+                                        </div>
+                                        <div *ngIf="pattern!=true">
+                                            <app-field-error-display [displayError]="isFieldValid('password',1)" errorMsg="Password must include at least 8 characters including at least 1 number or 1 special character and 1 Uppercase Alphabet.">
+                                            </app-field-error-display>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+                                    <div class="form-group form-black label-floating" [ngClass]="displayFieldCss('phone')">
+                                        <label class="control-label">Phone *</label>
+                                        <input type="number" class="form-control" maxlength="10" formControlName="phone" required pattern="[0-9]{10}" />
+                                        <div *ngIf="required!=true">
+                                            <app-field-error-display [displayError]="isFieldValid('phone',0)" errorMsg="Mobile Number is Required">
+                                            </app-field-error-display>
+                                        </div>
+                                        <div *ngIf="pattern!=true">
+                                            <app-field-error-display [displayError]="isFieldValid('phone',1)" errorMsg="Enter Mobile number in numeric value">
+                                            </app-field-error-display>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+
+                            <button type="reset" class="btn btn-danger pull-right">Reset</button>
+                            <button type="submit" class="btn btn-danger pull-right">Registration</button>
+
+                            <div class="clearfix"></div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </div>
+</div>
+<!--Doctor Register-->
+<div class="main-content" *ngIf="name != null">
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-md-8">
+                <div class="card">
+                    <div class="card-header" data-background-color="red">
+                        <h4 class="title">Add New Doctor</h4>
+
+                    </div>
+                    <div class="card-content">
+
+                        <form [formGroup]="rForm" (ngSubmit)="addPost(rForm.value,'top','center')">
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <div class="form-group form-black label-floating" [ngClass]="displayFieldCss('firstname')">
+                                        <label class="control-label">First Name *</label>
+                                        <input type="text" class="form-control" formControlName="firstname" pattern="^[A-Za-z]{1,10}$" required>
+                                        <div *ngIf="required!=true">
+                                            <app-field-error-display [displayError]="isFieldValid('firstname',0)" errorMsg="First Name is Required">
+                                            </app-field-error-display>
+                                        </div>
+                                        <div *ngIf="pattern!=true">
+                                            <app-field-error-display [displayError]="isFieldValid('firstname',1)" errorMsg="First Name Accepte only 1 to 10 Alphabet">
+                                            </app-field-error-display>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+                                    <div class="form-group form-black label-floating" [ngClass]="displayFieldCss('lastname')">
+                                        <label class="control-label">Last Name *</label>
+                                        <input type="text" class="form-control" formControlName="lastname" required pattern="^[A-Za-z]{1,10}$">
+                                        <div *ngIf="required!=true">
+                                            <app-field-error-display [displayError]="isFieldValid('lastname',0)" errorMsg="Last Name is Required">
+                                            </app-field-error-display>
+                                        </div>
+                                        <div *ngIf="pattern!=true">
+                                            <app-field-error-display [displayError]="isFieldValid('lastname',1)" errorMsg="Last Name Accepte only 1 to 10 Alphabet">
+                                            </app-field-error-display>
+                                        </div>
+
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="row">
+                                <div class="col-md-12">
+                                    <div class="form-group form-black label-floating" [ngClass]="displayFieldCss('email')">
+                                        <label class="control-label">Email address *</label>
+                                        <input type="email" class="form-control" formControlName="email" pattern="^\w+@[a-zA-Z_]+?\.[a-zA-Z]{2,3}$" required>
+                                        <div *ngIf="required!=true">
+                                            <app-field-error-display [displayError]="isFieldValid('email',0)" errorMsg="Email is Required">
+                                            </app-field-error-display>
+                                        </div>
+                                        <div *ngIf="pattern!=true">
+                                            <app-field-error-display [displayError]="isFieldValid('email',1)" errorMsg="Enter Email is Ex. azamsharp@gmail.com Format">
+                                            </app-field-error-display>
+                                        </div>
+                                    </div>
+                                </div>
+
+                            </div>
+
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <div class="form-group form-black label-floating" [ngClass]="displayFieldCss('password')">
+                                        <label class="control-label">Password *</label>
+                                        <input type="password" class="form-control" formControlName="password" required pattern="((?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[@#$%]).{8,20})">
+                                        <div *ngIf="required!=true">
+                                            <app-field-error-display [displayError]="isFieldValid('password',0)" errorMsg="Password is Required">
+                                            </app-field-error-display>
+                                        </div>
+                                        <div *ngIf="pattern!=true">
+                                            <app-field-error-display [displayError]="isFieldValid('password',1)" errorMsg="Password must include at least 8 characters including at least 1 number or 1 special character and 1 Uppercase Alphabet.">
+                                            </app-field-error-display>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+                                    <div class="form-group form-black label-floating" [ngClass]="displayFieldCss('phone')">
+                                        <label class="control-label">Phone *</label>
+                                        <input type="number" class="form-control" maxlength="10" formControlName="phone" required pattern="[0-9]{10}" />
+                                        <div *ngIf="required!=true">
+                                            <app-field-error-display [displayError]="isFieldValid('phone',0)" errorMsg="Mobile Number is Required">
+                                            </app-field-error-display>
+                                        </div>
+                                        <div *ngIf="pattern!=true">
+                                            <app-field-error-display [displayError]="isFieldValid('phone',1)" errorMsg="Enter Mobile number in numeric value">
+                                            </app-field-error-display>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+
+
+                            <button type="reset" class="btn btn-danger pull-right">Reset</button>
+                            <button type="submit" class="btn btn-danger pull-right">Add</button>
+
+                            <div class="clearfix"></div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </div>
+</div>

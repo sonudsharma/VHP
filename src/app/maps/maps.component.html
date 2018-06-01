@@ -1,0 +1,149 @@
+<div class="main-content">
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-md-8">
+                <div class="card">
+                    <div class="card-header" data-background-color="red">
+                        <h4 class="title">Patient Listing Report</h4>
+                    </div>
+                    <div class="card-content">
+                        <form [formGroup]="rForm" (ngSubmit)="view(rForm.value)">
+                            <div class="row">
+                                <div class="col-md-12">
+                                    <div class="form-group form-black label-floating is-empty" [ngClass]="displayFieldCss('userType')">
+                                        <label>User Type*</label>
+                                        <select class="form-control" id="userType" name="userType" formControlName="userType" (ngModelChange)="saverange($event)"
+                                        required>
+
+                                            <option *ngFor="let userType of userType" [value]="userType">{{userType}}</option>
+                                        </select>
+                                        <div>
+                                            <app-field-error-display [displayError]="isFieldValid('userType',0)" errorMsg="User Type is Required">
+                                            </app-field-error-display>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                         
+                            <!-- <div class="row">
+                                <div class="col-md-12">
+                                    <div class="form-group form-black label-floating is-empty" [ngClass]="displayFieldCss('hospital')">
+                                        <label>Hospital Name *</label>
+                                        <select class="form-control" id="hospital" name="hospital" formControlName="hospital" (ngModelChange)="saverange($event)"
+                                            required>
+
+                                            <option *ngFor="let hospital of arr1" [value]="hospital.name">{{hospital.name}}</option>
+                                        </select>
+                                        <div>
+                                            <app-field-error-display [displayError]="isFieldValid('hospital',0)" errorMsg="Hospital is Required">
+                                            </app-field-error-display>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-md-12">
+                                    <div class="form-group form-black label-floating is-empty" [ngClass]="displayFieldCss('doctor')">
+                                        <label>Doctor Name</label>
+                                        <select class="form-control" id="doctor" name="doctor" formControlName="doctor" required>
+
+                                            <option *ngFor="let doctor of arr2" [value]="doctor.title">{{doctor.title}}</option>
+                                        </select>
+                                        <div>
+                                            <app-field-error-display [displayError]="isFieldValid('doctor',0)" errorMsg="Doctor is Required">
+                                            </app-field-error-display>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div> -->
+
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <div class="form-group form-black label-floating is-empty" [ngClass]="displayFieldCss('fromDate')">
+                                        <label>From Date</label>
+                                        <input type="date" class="form-control" id="fromDate" formControlName="fromDate" name="fromDate" required>
+                                        <div>
+                                            <app-field-error-display [displayError]="isFieldValid('fromDate',0)" errorMsg="Date is Required">
+                                            </app-field-error-display>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+                                    <div class="form-group form-black label-floating is-empty" [ngClass]="displayFieldCss('toDate')">
+                                        <label>To Date</label>
+                                        <input type="date" class="form-control" id="toDate" formControlName="toDate" name="toDate" required>
+                                        <div>
+                                            <app-field-error-display [displayError]="isFieldValid('toDate',0)" errorMsg="Date is Required">
+                                            </app-field-error-display>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+
+
+                            <button type="reset" class="btn btn-danger pull-right">Reset</button>
+                            <button type="Submit" class="btn btn-danger pull-right">View Report</button>
+
+                            <div class="clearfix"></div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-md-12">
+                <div class="card">
+                    <div class="card-header" data-background-color="red">
+                        <div class="row">
+                            <div class="col-md-9">
+                                <p class="title" style="padding-top: 0px;margin-top: 17px;font-size:18px">{{person}} Listing</p>
+                            </div>
+                            <div class="col-md-3">
+                                <div class="form-group is-empty" style="margin-top: 3px;">
+                                    <!-- <p class="category">Here is a subtitle for this table</p>col-xs-12 col-sm-10 col-md-8 col-sm-offset-1 col-md-offset-2 -->
+                                    <input type="text" [(ngModel)]="term" class="form-control " placeholder="Search" style="color: white">
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="card-content table-responsive">
+                        <table class="table">
+                            <thead class="text-danger">
+                                <tr>
+                                    <!-- <th>Id</th> -->
+                                    <th>First Name</th>
+                                    <th>Last Name</th>
+                                    <th>Phone</th>
+                                    <th>Address</th>
+                                    <th>Gender</th>
+                                    <th>DOB</th>
+                                    <th>Weight</th>
+                                    <th>Height</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr *ngFor="let user of arr3 | filter:term">
+                                    <td>{{user.FirstName}}</td>
+                                    <td>{{user.LastName}}</td>
+                                    <td>{{user.phone}}</td>
+                                    <td>{{user.Address}}</td>
+                                    <td>{{user.Gender}}</td>
+                                    <td>{{convert(user.Dob)}}</td>
+                                    <td>{{user.Weight}}</td>
+                                    <td>{{user.Height}}</td>
+                                </tr>
+                            </tbody>
+                        </table>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+</div>

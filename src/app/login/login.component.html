@@ -1,0 +1,76 @@
+<div class="login-page"  style="padding-left: 300px">
+  <div class="row justify-content-md-center">
+      <div class="col-md-4">
+         
+      </div>
+  </div>
+</div>
+
+<div id="map">
+      
+    <div class="main-content">
+        <div class="container-fluid">
+            <div class="row">
+                <div class="col-md-8">
+                    <div class="card">
+                        <div class="card-header" data-background-color="red">
+                            <h4 class="title">Login Form</h4>
+                          
+                        </div>
+                        <div class="card-content">
+                            <form [formGroup]="rForm" (ngSubmit)="addlogin(rForm.value,'top','center')">
+                                  
+                                <div class="row">
+                                    <div class="col-md-12">
+                                        <div class="form-group form-black label-floating">
+                                            <label class="control-label">User Type*</label>
+                                            <select class="form-control" id="userType" formControlName="userType" ngModule required>
+    
+                                                <option *ngFor="let userType of userType" [value]="userType">{{userType}}</option>
+                                            </select>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-md-12">
+                                            <!-- [ngClass]="displayFieldCss('username')" -->
+                                        <div class="form-group form-black label-floating" >
+                                            <label class="control-label">Email address *</label>
+                                            <input type="email" class="form-control" id="username" formControlName="username" ngModule required> 
+                                                <!-- <app-field-error-display 
+                                                    [displayError]="isFieldValid('username')" 
+                                                    errorMsg="Email is Required">
+                                                </app-field-error-display>       -->
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="row">
+                                    <div class="col-md-12">
+                                            <!-- [ngClass]="displayFieldCss('password')" -->
+                                        <div class="form-group form-black label-floating" >
+                                            <label class="control-label">Password *</label>
+                                            <input type="password" class="form-control" id="password" formControlName="password" ngModule required>
+                                                <!-- <app-field-error-display 
+                                                    [displayError]="isFieldValid('password')" 
+                                                    errorMsg="Password is Required">
+                                                </app-field-error-display> -->
+                                        </div>
+                                    </div>
+                                </div>
+                                <button type="button" class="btn btn-danger pull-right"  [routerLink]="['/register']">Register</button>
+                                <button type="submit" class="btn btn-danger pull-right" >Login</button>
+                               
+                            </form>
+                            <a class="pull-right" [routerLink]="['/forgotPassword']"  style="margin-top: 19px;">Forgot Your Password ?</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+
+</div>
+
+
